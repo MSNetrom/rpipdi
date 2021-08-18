@@ -11,21 +11,20 @@
 
 #include <stdint.h>
 
-
-#define FLASH_BASE_ADDR    0x0800000
-#define EEPROM_BASE_ADDR   0x08c0000
+#define FLASH_BASE_ADDR 0x0800000
+#define EEPROM_BASE_ADDR 0x08c0000
 #define PROD_SIG_BASE_ADDR 0x08e0200
 #define USER_SIG_BASE_ADDR 0x08e0400
-#define FUSE_BASE_ADDR     0x08f0020
-#define LOCK_BASE_ADDR     0x08f0027
-#define IO_BASE_ADDR       0x1000000
-#define SRAM_BASE_ADDR     0x1002000
-#define DEVICE_ID_ADDR     0x1000090
+#define FUSE_BASE_ADDR 0x08f0020
+#define LOCK_BASE_ADDR 0x08f0027
+#define IO_BASE_ADDR 0x1000000
+#define SRAM_BASE_ADDR 0x1002000
+#define DEVICE_ID_ADDR 0x1000090
 
-#define IO_SIZE            0x1000
+#define IO_SIZE 0x1000
 
-
-typedef struct {
+typedef struct
+{
   const char *name;
   uint32_t sig;
   uint16_t page_size;
@@ -39,7 +38,6 @@ typedef struct {
   uint32_t user_size;
   uint32_t prod_size;
 } device_t;
-
 
 extern device_t devices[];
 
