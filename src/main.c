@@ -346,11 +346,11 @@ int main(int argc, char *argv[])
 
   // Load HEX file
   uint32_t computed_crc = 0;
-  uint16_t page_fill[BUF_SIZE / page_size];
+  uint16_t page_fill[BUF_SIZE / 512];
   if (write_file)
   {
     // Clear memory
-    memset(buf, 0xff, BUF_SIZE);
+    memset(buf, 0x08, BUF_SIZE);
 
     // Read HEX file
     FILE *f = fopen(write_file, "rt");
