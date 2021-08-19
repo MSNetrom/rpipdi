@@ -325,6 +325,7 @@ int main(int argc, char *argv[])
 
   // Compute pages
   uint16_t page_size = mem_get_page_size(mem, device);
+  printf("Using page-size %d", page_size);
   uint32_t pages = 0;
 
   if (page_size)
@@ -340,6 +341,8 @@ int main(int argc, char *argv[])
     if (erase)
       fail("Cannot erase %s", mem->name);
   }
+
+  printf("Wanna write %d pages", pages);
 
   // Load HEX file
   uint32_t computed_crc = 0;
