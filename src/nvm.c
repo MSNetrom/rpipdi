@@ -11,7 +11,6 @@
 #include "nvm.h"
 #include "pdi.h"
 #include "devices.h"
-#include <stdio.h>
 
 #define _RETRY_LOOP(OP)                 \
   do                                    \
@@ -150,8 +149,6 @@ static bool _write_page(uint8_t erase_page_buf_cmd, uint8_t load_page_buf_cmd,
 {
   uint8_t write[] = {ST | xPTRpp | SZ_1};
   uint8_t dummy[] = {ST | xPTRpp | SZ_1, 0}; // trigger erase+program
-
-  printf("Writing %d bytes, on address %d. First byte is %d.\n", len, addr, buf[0]);
 
   return _exec(erase_page_buf_cmd) &&
          nvm_command(load_page_buf_cmd) &&

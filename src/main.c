@@ -459,8 +459,8 @@ int main(int argc, char *argv[])
       }
       else
       {
-        if (!nvm_write_page(mem->type, addr, &buf[offset], page_fill[i]))
-          fail("Failed to write page at address 0x%08x", addr);
+        nvm_write_page(mem->type, addr, &buf[offset], page_fill[i]);
+        //fail("Failed to write page at address 0x%08x", addr);
       }
     }
 
