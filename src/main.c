@@ -346,7 +346,7 @@ int main(int argc, char *argv[])
 
   // Load HEX file
   uint32_t computed_crc = 0;
-  uint16_t page_fill[BUF_SIZE / 512];
+  uint16_t page_fill[BUF_SIZE / page_size];
   if (write_file)
   {
     // Clear memory
