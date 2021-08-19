@@ -450,8 +450,6 @@ int main(int argc, char *argv[])
       uint32_t offset = i * page_size;
       uint32_t addr = address + offset;
 
-      printf("Page %d, writing %d bytes, on address %d\n", i, page_fill[i], addr);
-
       if (!page_fill[i])
       {
         if (!nvm_erase_page(mem->type, addr))
