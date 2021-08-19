@@ -441,15 +441,6 @@ int main(int argc, char *argv[])
   // Write IHEX to memory
   if (write_file)
   {
-    for (int p = 0; p < size; p += 16)
-    {
-      for (int t = 0; t < 16; t += 2)
-      {
-        uint16_t by = *(uint16_t *)(&buf[p + t]);
-        printf("0x%02x ", by);
-      }
-      printf("\n");
-    }
 
     // Erase and write pages
     uint32_t empty = 0;
@@ -459,6 +450,8 @@ int main(int argc, char *argv[])
       uint32_t offset = i * page_size;
       uint32_t addr = address + offset;
 
+      printf("Page %d, writing %d bytes, on address %d\n", i, page_fill[i], addr);
+
       if (!page_fill[i])
       {
         if (!nvm_erase_page(mem->type, addr))
@@ -466,8 +459,11 @@ int main(int argc, char *argv[])
 
         empty++;
       }
-      else if (!nvm_write_page(mem->type, addr, &buf[offset], page_fill[i]))
-        fail("Failed to write page at address 0x%08x", addr);
+      else
+      {
+        if (!nvm_write_page(mem->type, addr, &buf[offset], page_fill[i]))
+          fail("Failed to write page at address 0x%08x", addr);
+      }
     }
 
     if (verbose)
