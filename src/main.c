@@ -350,7 +350,7 @@ int main(int argc, char *argv[])
   if (write_file)
   {
     // Clear memory
-    memset(buf, 0x08, BUF_SIZE);
+    memset(buf, 0xff, BUF_SIZE);
 
     // Read HEX file
     FILE *f = fopen(write_file, "rt");
@@ -441,6 +441,16 @@ int main(int argc, char *argv[])
   // Write IHEX to memory
   if (write_file)
   {
+    for (int p = 0; p < size; p += 16)
+    {
+      for (int t = 0; t < 16; t += 2)
+      {
+        uint16_t by = *(uint16_t *)(&buf[p + t]);
+        printf("0x%02x ", by);
+      }
+      printf("\n");
+    }
+
     // Erase and write pages
     uint32_t empty = 0;
 
