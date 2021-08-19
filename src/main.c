@@ -452,8 +452,8 @@ int main(int argc, char *argv[])
 
       if (!page_fill[i])
       {
-        if (!nvm_erase_page(mem->type, addr))
-          fail("Failed to erase page at address 0x%08x", addr);
+        nvm_erase_page(mem->type, addr);
+        //fail("Failed to erase page at address 0x%08x", addr);
 
         empty++;
       }
