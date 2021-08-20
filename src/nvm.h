@@ -14,7 +14,7 @@
 #include <stdint.h>
 
 #define WAIT_ATTEMPTS 20000
-#define MAX_RETRY 20
+#define MAX_RETRY 100
 
 typedef enum
 {
