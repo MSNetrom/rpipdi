@@ -450,7 +450,7 @@ int main(int argc, char *argv[])
       uint32_t offset = i * page_size;
       uint32_t addr = address + offset;
 
-      printf("Try: Page %d, writing %d bytes of total %d bytes", i, page_fill[i], size);
+      printf("Try: Page %d, writing %d bytes of total %d bytes\n", i, page_fill[i], size);
 
       if (!page_fill[i])
       {

@@ -22,7 +22,7 @@
         return true;                    \
       pdi_open();                       \
     }                                   \
-    printf("Reached maximum retry");    \
+    printf("Reached maximum retry\n");  \
     return false;                       \
   } while (0)
 
