@@ -346,7 +346,8 @@ int main(int argc, char *argv[])
 
   // Load HEX file
   uint32_t computed_crc = 0;
-  uint16_t page_fill[BUF_SIZE / 512];
+  bool write_page[pages];
+  //uint16_t page_fill[BUF_SIZE / 512];
   if (write_file)
   {
     // Clear memory
@@ -369,17 +370,14 @@ int main(int argc, char *argv[])
       uint32_t offset = i * page_size;
 
       // Compute page fill
-      page_fill[i] = page_size;
+      u_int32_t fs = 0;
       uint8_t *ptr = buf + offset + page_size;
       for (unsigned j = 0; j < page_size; j++)
         if (*--ptr == 0xff)
-          page_fill[i]--;
+          ++fs;
         else
           break;
-
-      // Limit range of last page
-      if (size < offset + page_fill[i])
-        page_fill[i] = size % page_size;
+      write_page[i] = (fs != page_size);
     }
 
     // Compute CRC
@@ -450,24 +448,22 @@ int main(int argc, char *argv[])
       uint32_t offset = i * page_size;
       uint32_t addr = address + offset;
 
-      if (i == 18)
+      /*if (i == 18)
       {
         page_fill[i] = 128;
-      }
+      }*/
 
-      printf("Try: Page %d, writing %d bytes of total %d bytes\n", i, page_fill[i], size);
-
-      if (!page_fill[i])
+      if (write_page[i])
       {
-        nvm_erase_page(mem->type, addr);
-        //fail("Failed to erase page at address 0x%08x", addr);
+        nvm_write_page(mem->type, addr, &buf[offset], page_size);
+        //fail("Failed to write page at address 0x%08x", addr);
 
         empty++;
       }
       else
       {
-        nvm_write_page(mem->type, addr, &buf[offset], page_fill[i]);
-        //fail("Failed to write page at address 0x%08x", addr);
+        nvm_erase_page(mem->type, addr);
+        //fail("Failed to erase page at address 0x%08x", addr);
       }
     }
 

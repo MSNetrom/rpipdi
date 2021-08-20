@@ -11,7 +11,6 @@
 #include "nvm.h"
 #include "pdi.h"
 #include "devices.h"
-#include <stdio.h>
 
 #define _RETRY_LOOP(OP)                 \
   do                                    \
@@ -22,7 +21,6 @@
         return true;                    \
       pdi_open();                       \
     }                                   \
-    printf("Reached maximum retry\n");  \
     return false;                       \
   } while (0)
 
