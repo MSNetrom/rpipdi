@@ -282,8 +282,14 @@ int main(int argc, char *argv[])
   }
 
   // Read memory
-  if ((dump || read_file) && !nvm_read(address, buf, size))
+  /*if ((dump || read_file) && !nvm_read(address, buf, size))
     fail("Failed to read %u bytes from address 0x%08x", size, address);
+
+  */
+  if ((dump || read_file))
+  {
+    nvm_read(address, buf, size);
+  }
 
   // Dump memory
   if (dump)
